@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+   
+    <ui:composition >
+        <h:form id="ambulance_data_View_Form">
+            
+            <h:panelGrid columns="6" id="ambulance_Panel"  >
+                
+                <h:outputText class="named" value="#{msg.blood_group}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.bloodGroup}" title="#{msg.blood_group}"/>
+                
+                <h:outputText class="named" value="#{msg.disabled}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.disability}" title="#{msg.disabled}"/>
+                
+                <h:outputText class="named" value="#{msg.dependent}:" />
+                <p:selectBooleanCheckbox value="#{indexController.selectPerson.dependent}" disabled="true" />
+                
+                <h:outputText class="named" value="#{msg.benefit_code}" />
+                <h:outputText class="means" value="#{ambulanceDataController.benefitString}" title="#{msg.benefit_code}"/>
+
+                <h:outputText class="named" value="#{msg.doc_series}" />
+                <h:outputText class="means" value="#{indexController.selectPerson.benefitDocSer}" title="#{msg.doc_series}"/>
+
+                <h:outputText class="named" value="#{msg.doc_number}" />
+                <h:outputText class="means" value="#{indexController.selectPerson.benefitDocNum}" title="#{msg.doc_number}"/>                
+                </h:panelGrid>
+                <br/>
+                
+                <p:dataTable id="allergylist" var="item" value="#{ambulanceDataController.allergiList}" rendered="#{ambulanceDataController.allergiList.size() > 0}">
+                    <f:facet name="header" class="lefttext" >
+                        #{msg.allergiList}
+                    </f:facet>
+                    <p:column styleClass="columnHeaderName">
+                        <h:outputText  class="means" value="#{item.allergyPersonPK.allergyReaction}" /> 
+                    </p:column>
+                </p:dataTable>
+            
+        </h:form>
+    </ui:composition>
+</html>
+

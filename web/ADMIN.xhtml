@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view>
+        <h:head>
+            <title>ADMIN</title>
+            <h:outputStylesheet library="css-style" name="index-style.css"/>
+        </h:head>
+        <h:body >
+            <h:form>
+                <div id="header">
+                    
+                    <div id="welcomeName">
+                        <h:outputText value="#{msg.administrator}" style="font-weight: bolder; color: white;font-size: 32px"/>
+                    </div>
+                    
+                    <div id="exit">
+                        <p:commandLink value="#{msg.exitString}" action="#{adminController.logout()}" style="text-decoration: none; color: white; font-weight: bold;" />
+                    </div>
+                </div>
+                
+            <p:tabView orientation="left">
+                <p:tab title="#{msg.pageControl}">
+                    <p:dataTable  id="docSpecPageTable" var="page" value="#{adminController.pages}"  selectionMode="single"   selection="#{adminController.sellectedPage}" rowKey="#{page.doctorName}">
+
+                        <p:column headerText="Ф.И.О."   width="30%" >
+                                    <h:outputText value="#{page.doctorName}" />
+                                </p:column>
+
+                                <p:column  headerText="Наименование специальности    /    Наименование доступных страниц для данной специальности">
+                                    <p:dataTable  styleClass="innerTable" var="spec" value="#{page.docSpecName}"  selectionMode="single"   rowKey="#{spec.docSpec}" 
+                                                  rendered="#{page.docSpecName.size() > 0}">
+                                        <p:column width="30%"> 
+                                            <h:outputText value="#{spec.docSpec.getIdspec().getSpecname()}" />
+                                        </p:column>
+                                        <p:column width="30%">
+                                            <p:selectOneMenu value="#{spec.htmlType}"  converter="#{adminController.htmlPageTypeConverter}" style="width: 90%" effect="fade" >
+                                                <p:ajax  listener="#{spec.onTypeChange()}"  update="@([id$=PageSellect])"/>
+                                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                                <f:selectItems value="#{spec.htmlPagesType}" var="pt" itemLabel="#{pt.htmlTypeName}" itemValue="#{pt}"  />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                        <p:column width="30%">
+
+                                            <p:selectOneMenu id="PageSellect"  value="#{spec.htmlPage}"  converter="#{adminController.htmlPageConverter}" style="width: 90%"  effect="fade"  >
+                                                <p:ajax  listener="#{spec.onPageChange()}"  update="@([id$=docSpecPageTable])"/>
+                                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                                <f:selectItems value="#{spec.htmlPagesName}" var="p" itemLabel="#{p.htmlPageName}" itemValue="#{p}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="width: 35px;padding-left: 5px !important" >
+                                        <p:commandButton  icon="ui-icon-search"  iconPos="right" actionListener="#{spec.onView()}" disabled="#{spec.htmlType == null and spec.htmlPage == null}"/>
+                                    </p:column>      
+
+                                    </p:dataTable>  
+                                </p:column>
+                            </p:dataTable>
+                </p:tab>
+                <p:tab title="#{msg.admin2}">
+                    <p:dataTable  id="docRoleGroupTable" var="page" value="#{adminController.pages}"  selectionMode="single"   selection="#{adminController.sellectedPage}" 
+                                  rowKey="#{page.doctorName}">
+                        <p:column headerText="#{msg.fio}"   >
+                            <h:outputText value="#{page.doctorName}" />
+                        </p:column>
+                        
+                        <p:column headerText="#{msg.personsRole}"  style="width: 20%" >
+                            <p:selectOneMenu  value="#{page.roleName}"  converter="#{adminController.roleConverter}" style="width: 90%"  effect="fade"  >
+                                <p:ajax listener="#{page.onRoleChange()}"/>
+                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                <f:selectItems value="#{page.roleList}" var="p" itemLabel="#{p.getRoleName()}" itemValue="#{p}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                        
+                        <p:column headerText="#{msg.group}"  >
+                            <p:fieldset legend="#{msg.open}" toggleable="true" toggleSpeed="500" collapsed="true">
+                                <p:pickList  value="#{page.group}" var="group" effect="bounce" itemValue="#{group}" itemLabel="#{group.groupName}"  responsive="true" 
+                                                 converter="#{adminController.groupConverter}">
+                                    <f:facet name="sourceCaption">#{msg.available}</f:facet>
+                                    <f:facet name="targetCaption">#{msg.source}</f:facet>                            
+                                </p:pickList>
+                            </p:fieldset>                            
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                
+                <p:tab title="#{msg.admin3}">
+                    <p:panel header="#{msg.role}" style="margin-top:20px">
+                            <h:outputText value="Настройка ролей" />
+                    </p:panel>                
+                    <p:panel header="#{msg.roleGroup}" style="margin-top:20px">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank">
+                            <h:outputText value="Настройка групп ролей" />
+                        </p:panelGrid>
+                       </p:panel>                
+                </p:tab>
+                
+            </p:tabView>	
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                <p:graphicImage name="/image/AjaxLoading.gif" />
+            </p:dialog>   
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+
+

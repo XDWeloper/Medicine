@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+<application>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/messages</base-name>
+        <var>msg</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/terapevtProperty</base-name>
+        <var>terMsg</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/NeurologistPoperties</base-name>
+        <var>Neurologist</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Otolaryngologist</base-name>
+        <var>Otolaryngologist</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Gynecologist</base-name>
+        <var>Gynecologist</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Surgeon</base-name>
+        <var>Surgeon</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Ophthalmologist</base-name>
+        <var>Ophthalmologist</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Dermatovenerolog</base-name>
+        <var>Dermatovenerolog</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Psychiatrist</base-name>
+        <var>Psychiatrist</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Narcology</base-name>
+        <var>Narcology</var>
+    </resource-bundle>
+    <resource-bundle>
+        <base-name> ru.inversionkavkaz.DocMod.nls/Dentist</base-name>
+        <var>Dentist</var>
+    </resource-bundle>
+    <action-listener>
+    org.primefaces.application.DialogActionListener
+  </action-listener>
+  <navigation-handler>
+    org.primefaces.application.DialogNavigationHandler
+  </navigation-handler>
+  <view-handler>
+    org.primefaces.application.DialogViewHandler
+  </view-handler>
+</application>
+    <navigation-rule>
+        <from-view-id>/Pages/loginPage.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>doctor</from-outcome>
+            <to-view-id>/welcome.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/ADMIN.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>counter</from-outcome>
+            <to-view-id>/CounterPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/welcome.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>exit</from-outcome>
+            <to-view-id>/Pages/loginPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/ADMIN.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>exit</from-outcome>
+            <to-view-id>/Pages/loginPage.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/CounterPage.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>exit</from-outcome>
+            <to-view-id>/Pages/loginPage.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

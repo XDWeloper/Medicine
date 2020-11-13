@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+           <title>MedIk</title>
+           <h:outputStylesheet library="css-style" name="index-style.css"/>
+           <h:outputScript name="calendar_ru.js" library="js"/>
+           <f:facet name="first">
+           <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+           <link rel="shortcut icon" href="resources/image/9-512.ico" type="image/x-icon"/>
+           </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="110"  closable="true" collapsible="true" >
+                    <ui:include src="/Pages/templates/headerPage.xhtml"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <ui:include src="/Pages/templates/footerPage.xhtml"/>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="445" header="#{msg.left}" collapsible="true" resizable="true" minSize="400" maxSize="450">
+                        <ui:include src="/Pages/templates/leftContentPage.xhtml"/>
+                </p:layoutUnit>
+ 
+                <p:layoutUnit  position="east" size="300" header="#{msg.obs_rez}" collapsible="true" resizable="true" minSize="200" maxSize="400">
+                    <h:form id="rightContent" >
+                            <ui:include src="/Pages/templates/rightContentPage.xhtml"/>
+                        <div class="rezForm">
+                            <p:commandButton value="#{msg.obs_rez}" icon="ui-icon-circle-plus" style="width: 99%;"  
+                                             actionListener="#{doctorsPagesController.openRezultView('new',indexController.selectSpec,0)}" 
+                                             disabled="#{indexController.selectPerson == null}" />
+                        </div>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <ui:insert name="content">
+                        <ui:include src="/Pages/templates/contentPage.xhtml"/>
+                    </ui:insert>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:body>
+
+    </f:view>
+</html>
+

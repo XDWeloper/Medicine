@@ -1,0 +1,64 @@
+#docContent{
+font-size: 12px;
+ font-family: Verdana !important;
+
+}
+.named {
+    font-weight: bold !important;
+    color: black !important;
+        font-family: Verdana !important;
+
+}
+.means{
+    color: brown !important;
+    font-weight: bold !important;
+        font-family: Verdana !important;
+
+}
+.textArea{
+    color: brown !important;
+    font-size: 12px;
+    font-style: italic;
+     font-family: Verdana !important;
+
+}
+.ui-fieldset  legend  {
+    background-color: khaki !important;
+    background-image: none !important;
+    color: #2B579A !important;
+    border: 1px solid #2B579A !important;
+                font-family: Verdana !important;
+
+}
+.ui-fieldset {
+    border: 1px solid #2B579A !important;
+    font-family: Verdana !important;
+}
+
+.ui-button{
+    border: 1px solid #2B579A !important;
+    font-family: Verdana !important;
+}
+.ui-button-text{
+    color: black;
+    font-family: Verdana !important;
+}
+.ui-inputtextarea{
+    box-shadow: none !important;
+    font-weight: bold !important;
+    color: green !important;
+    font-size: 14px !important;
+            font-family: Verdana !important;
+
+/*    border: 1px solid brown !important;*/
+}
+.ui-inputfield{
+     box-shadow: none !important;
+     box-shadow: none;
+    color: green !important;
+    font-weight: bold;
+    font-size: 14px !important;
+            font-family: Verdana !important;
+
+/*    border: 1px solid brown !important;*/
+}

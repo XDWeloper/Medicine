@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view>
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form>
+                <div id="header">
+                    
+                    <div id="welcomeName">
+                            <h:outputText value="#{msg.welcome_doctor}" style="font-weight: bolder; color: white;"/>
+                            <h:outputText value="#{indexController.docName}" style="font-weight: bolder; color: white;"/>
+                            <br/>
+                            <h:outputText value="#{msg.selectSpec}:  " style="font-weight: bolder; color: white;"/>
+                            <p:selectOneMenu id="console" value="#{indexController.selectSpec}" converter="#{indexController.docConverter}" styleClass="console" 
+                                             style="width: 40%;">
+                                <p:ajax event="change" update=":leftForm:priemlist :contentForm" listener="#{indexController.onChangeSpec()}"/>
+                                <f:selectItems value="#{indexController.specList}" var="sl" itemLabel="#{sl.idspec.specname}" itemValue="#{sl}"/>
+                            </p:selectOneMenu>
+                            
+                    </div>
+                    
+                    <div id="exit">
+                        <p:commandLink value="#{msg.exitString}" action="#{indexController.logout()}" style="text-decoration: none; color: white; font-weight: bold;" />
+                    </div>
+                </div>
+            </h:form>
+        </ui:composition>
+    </h:body>
+    </f:view>
+</html>
+

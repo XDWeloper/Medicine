@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{msg.terapevt}</title>
+        <h:outputStylesheet library="css-style" name="footer-style.css"/>
+        <h:outputStylesheet library="css-style" name="header-style.css"/>
+        <h:outputStylesheet library="css-style" name="terapevt-style.css"/>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+    </h:head>
+
+    <h:body>
+        <h:form id="DocForm">
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <div class = "footer">
+                        <ui:include src="/Pages/DoctorsPagesView/PagesFooter.xhtml"/>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="50"  closable="true" collapsible="true">
+                    <div class = "header">
+                    </div>
+                </p:layoutUnit>
+                
+
+                <p:layoutUnit  id="contenLayout" position="center">
+
+                    <div id="docContent">
+
+                        <h:panelGrid columns="2" style="margin-bottom:0px;float: left" cellpadding="2">
+                            <h:outputText value="#{terMsg.openTogle} : " />
+                            <p:inputSwitch class="named" value="#{terapevtController.openTogle}">
+                                <p:ajax listener="#{terapevtController.changeTogle()}" 
+                                        update="complaintsField  historyField skinIntegumentField lymphNodesField thyroidGlandField brifeField wheezingField heartTonesField 
+                                        arterPulsField langField bellyField liverField spleenField kidneyField perefOtekField diagnosisField osmotrRezField recomendationField SurveyField 
+                                        upSurveyField  ambulanceTreatmentField holdTreatmentField sanatoriumTreatmentField dispensaryLookingField"  />
+                            </p:inputSwitch>
+                        </h:panelGrid>
+
+                        <h:outputText class="means" value="   #{terapevtController.today}  &emsp;" style="float: right"/>
+                        <h:outputText class="named" value="#{msg.data} :   &emsp;" style="float: right" />
+                        <div style="clear: both"></div>
+                        <p>
+                            <p:fieldset id="complaintsField"  legend="#{terMsg.complaints}"    toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}">
+                                <p:inputTextarea  class="textArea" value="#{terapevtController.complaints}"  rows="3"   style="width: 100%" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                </p:inputTextarea>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset id="historyField" legend="#{terMsg.history}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:inputTextarea class="textArea" value="#{terapevtController.history}" rows="2"   style=" width:100% "  >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                </p:inputTextarea>
+                            </p:fieldset>
+                        </p>
+                        <p>
+                            <p:fieldset id="skinIntegumentField"   legend="#{terMsg.skinIntegument}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}">
+                                <p:selectManyCheckbox id="skin" value="#{terapevtController.selectedSkinIntegument}"  style="position: relative; top: -5px;float: left" >
+                                    <f:selectItem class="means" itemLabel="#{terMsg.skinClear} &emsp;" itemValue="clear"   />
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.skinNormal} &emsp; " itemValue="normal" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.skinPale} &emsp;" itemValue="pale" />
+                                    <f:selectItem  class="means" itemLabel="#{terMsg.skinAkro} &emsp;" itemValue="akro" />
+                                    <f:selectItem  class="means" itemLabel="#{terMsg.skinCian} &emsp;" itemValue="cian" />
+                                </p:selectManyCheckbox>  
+                                <p:inputText class="means" value="#{terapevtController.skinIntegument}" style="float: left;position: relative;top: -5px" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                </p:inputText>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset id="lymphNodesField" legend="#{terMsg.lymphNodes}"  toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" style="width: 38%; float: left;box-sizing: border-box" >
+                                <p:selectManyCheckbox id="lymphNodes" value="#{terapevtController.selectedlymphNodes}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.bo} " itemValue="bo" />
+                                </p:selectManyCheckbox>  
+                                <p:inputText class="means" value="#{terapevtController.lymphNodes}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                </p:inputText>
+                            </p:fieldset>
+                            <p:fieldset id="thyroidGlandField" legend="#{terMsg.thyroidGland}"  toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" style="width: 61%; float: right;box-sizing: border-box">
+                                <p:selectManyCheckbox id="thyroidGland" value="#{terapevtController.selectedthyroidGland}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.bo}" itemValue="bo" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.groull}" itemValue="groull" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.moovy} " itemValue="moovy" />
+                                </p:selectManyCheckbox>  
+                                <p:inputText class="means" value="#{terapevtController.thyroidGland}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                </p:inputText>
+                            </p:fieldset>
+                        </p>
+                        <div style="clear: both"/>
+                        <p>
+                            <p:fieldset id="brifeField" legend="#{terMsg.brife}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:selectManyCheckbox id="brife" value="#{terapevtController.selectedbrife}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.vezik} &emsp;" itemValue="vezik" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.hard} &emsp; " itemValue="hard" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.eazy} &emsp;" itemValue="easy" />
+                                </p:selectManyCheckbox>  
+                            </p:fieldset>
+                        </p>                        
+
+                        <p>
+                            <p:fieldset id="wheezingField" legend="#{terMsg.wheezing}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:selectManyCheckbox id="wheezing" value="#{terapevtController.selectedwheezing}" style="float: left">
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.no} " itemValue="no" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.yes}  " itemValue="yes" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.dry} " itemValue="dry" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.wet} &emsp;" itemValue="wet" />
+                                </p:selectManyCheckbox>  
+                                <h:outputText class="named" value="#{terMsg.in}"  style="float: left;position: relative; top: 5px"/> 
+                                <p:selectManyCheckbox  value="#{terapevtController.selectedwheezing1}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.inUp} " itemValue="up" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.middle}  " itemValue="middle" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.inBottom} &emsp;" itemValue="bottom" />
+                                </p:selectManyCheckbox>  
+                                <h:outputText class="named" value="#{terMsg.chest}"  style="float: left;position: relative; top: 5px"/> 
+                                <div style="clear: both"/>
+                                <p:selectManyCheckbox  value="#{terapevtController.selectedwheezing2}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.toRight} " itemValue="right" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.toLeft} &emsp;" itemValue="left" />
+                                </p:selectManyCheckbox>  &emsp;
+                                <h:outputText class="named" value="#{terMsg.castoliteBreath} &emsp;"  style="float: left;position: relative; top: 5px"/> &emsp;
+                                <p:inputText class="means" value="#{terapevtController.wheezing}" maxlength="3"  style="float: left;width: 50px" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                </p:inputText>
+                                <h:outputText class="named" value="&emsp; #{terMsg.inOneMin}"  style="float: left;position: relative; top: 5px"/> 
+                            </p:fieldset>
+                        </p>                        
+
+                        <p>
+                            <p:fieldset  id="heartTonesField" legend="#{terMsg.heartTones}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:selectManyCheckbox  value="#{terapevtController.selectedheartTones}" style="float: left" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.dim} &emsp;" itemValue="dim" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.loud} &emsp; " itemValue="loud" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.deaf} &emsp;" itemValue="deaf" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.clear} &emsp;" itemValue="clear" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.aortaAccent} &emsp; " itemValue="aorta" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.arteryAccent} &emsp;" itemValue="artery" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.sistalNoise} &emsp;" itemValue="noise" />
+                                </p:selectManyCheckbox>  
+                                <p:inputText class="means" value="#{terapevtController.heartTones}"  style="float: left;width: 100%" >
+                                    <p:ajax listener="#{terapevtController.lisen()}"/>
+                                </p:inputText>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset  id="arterPulsField" legend="#{terMsg.arterPuls}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row">
+                                    <p:selectManyCheckbox  value="#{terapevtController.selectedarterPuls}" style="flex: 1" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        <f:selectItem class="means" itemLabel="#{terMsg.psRitm} &emsp;" itemValue="ritm" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.psAritm} &emsp; " itemValue="aritm" />
+                                    </p:selectManyCheckbox>  
+                                    <p:inputText class="means" value="#{terapevtController.arterPuls}"  style="flex: 2" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                </div>         
+                                <p>
+                                    <h:outputText class="named" value="#{terMsg.chss} &emsp;"  /> 
+                                    <p:inputText class="means" value="#{terapevtController.chss}" style="width: 50px"  >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        </p:inputText>
+                                        <h:outputText class="named" value="&emsp; #{terMsg.inOneMin} &emsp;"  /> 
+                                        <h:outputText class="named" value="&emsp; #{terMsg.arteryOpress} &emsp;"  /> 
+                                        <p:inputText class="means" value="#{terapevtController.arteryOpress}"   style="width: 50px">
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                    <h:outputText class="named" value="&emsp; #{terMsg.opressUnits}"  /> 
+                                </p>
+                            </p:fieldset>     
+                        </p>
+                        <div style="clear: both"/>
+                        <p>
+                            <p:fieldset  id="langField" legend="#{terMsg.lang}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row">
+                                    <p:selectManyCheckbox  value="#{terapevtController.selectedLang}" style="flex: 1" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        <f:selectItem class="means" itemLabel="#{terMsg.langWet} &emsp;" itemValue="wet" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.langClear} &emsp; " itemValue="clear" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.langPink} &emsp;" itemValue="pink" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.langLined} &emsp;" itemValue="lined" />
+                                    </p:selectManyCheckbox>  
+                                    <p:inputText class="means" value="#{terapevtController.lang}"  style="flex: 1" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                </div>
+                            </p:fieldset>
+                        </p>
+                        <div style="clear: both"/>
+                        <p>
+                            <p:fieldset  id="bellyField" legend="#{terMsg.belly}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}"  >
+                                <div style="display: flex; flex-direction:  row">
+                                    <p:selectManyCheckbox  value="#{terapevtController.selectedBelly}"  >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        <f:selectItem class="means" itemLabel="#{terMsg.bellySoft} &emsp;" itemValue="soft" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.bo} &emsp; " itemValue="bo" />
+                                    </p:selectManyCheckbox> 
+                                    <p:inputText class="means" value="#{terapevtController.belly}" style="flex: 2"   >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                </div>
+                            </p:fieldset>
+                        </p>
+                        <div style="clear: both"/>
+                        <p>
+                            <p:fieldset  id="liverField" legend="#{terMsg.liver}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row">
+                                    <p:selectManyCheckbox  value="#{terapevtController.selectedLiver}"  >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        <f:selectItem class="means" itemLabel="#{terMsg.Palp} &emsp;" itemValue="palp" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.NoPalp} &emsp; " itemValue="noPalp" />
+                                    </p:selectManyCheckbox>  
+                                    <p:inputText class="means" value="#{terapevtController.liver}"  style="flex: 2" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                </div>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset  id="spleenField" legend="#{terMsg.spleen}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row">
+                                    <p:selectManyCheckbox  value="#{terapevtController.selectedSpleen}" style="flex:1 " >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        <f:selectItem class="means" itemLabel="#{terMsg.Palp} &emsp;" itemValue="palp" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.NoPalp} &emsp; " itemValue="noPalp" />
+                                    </p:selectManyCheckbox>  
+                                    <p:inputText class="means" value="#{terapevtController.spleen}"  style="flex: 2" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                </div>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset  id="kidneyField" legend="#{terMsg.kidney}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row">
+                                    <p:selectManyCheckbox  value="#{terapevtController.selectedKidney}" style="flex:0" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        <f:selectItem class="means" itemLabel="#{terMsg.Palp} &emsp;" itemValue="palp" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.NoPalp} &emsp; " itemValue="noPalp" />
+                                        <f:selectItem class="means" itemLabel="#{terMsg.symptom} &emsp; " itemValue="symptom" />
+                                    </p:selectManyCheckbox>  
+                                    <p:inputText class="means" value="#{terapevtController.kidney}"  style="flex: 0" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                </div>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset  id="perefOtekField" legend="#{terMsg.perefOtek}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row">
+                                    <p:selectManyCheckbox  value="#{terapevtController.selectedPerefOtek}" style="flex:1 " >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                        <f:selectItem class="means" itemLabel="#{terMsg.notOpr} &emsp;" itemValue="palp" />
+                                    </p:selectManyCheckbox>  
+                                    <p:inputText class="means" value="#{terapevtController.perefOtek}"  style="flex: 2" >
+                                        <p:ajax listener="#{terapevtController.lisen()}"/>
+                                    </p:inputText>
+                                </div>
+                            </p:fieldset>
+                        </p>
+
+
+                        <ui:include src="/Pages/DoctorsPagesView/DoctorsContentFooter.xhtml"/>
+
+                        <h:outputText class="named" value="#{msg.doctor} :    " style="float: left"/> 
+                        <h:outputText class="means" value=" #{terapevtController.doctor}" style="float: left"/> 
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                            <p:graphicImage name="/image/AjaxLoading.gif" />
+                        </p:dialog>                        
+                    </div>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+

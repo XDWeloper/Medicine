@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{Ophthalmologist.ophthalmologist}</title>
+        <h:outputStylesheet library="css-style" name="footer-style.css"/>
+        <h:outputStylesheet library="css-style" name="header-style.css"/>
+        <h:outputStylesheet library="css-style" name="terapevt-style.css"/>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+        <h:outputStylesheet library="css-style" name="doc-view-style.css"/>
+    </h:head>
+
+    <h:body>
+        <h:form id="DocForm">
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <div class = "footer">
+                        <ui:include src="/Pages/DoctorsPagesView/PagesFooter.xhtml"/>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="50"  closable="true" collapsible="true">
+                    <div class = "header">
+                    </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit  id="contenLayout" position="center">
+
+                    <p>
+                        <p:fieldset id="complaintsField"  legend="#{terMsg.complaints}"    toggleable="true" toggleSpeed="500" collapsed="">
+                            <p:inputTextarea  class="textArea" value="#{ophthalmologistController.complaints}"  rows="3"   style="width: 100%" >
+                                <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </p:fieldset>
+                    </p>
+
+                    <div class="flexDiv" style="border: none !important">
+                        <h:outputText class="named" value="#{Ophthalmologist.visus}_#{Ophthalmologist.od} " style="position: relative;top: 5px" />
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.visus_OD}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Ophthalmologist.visus}_#{Ophthalmologist.os} " style="position: relative;top: 5px" /> 
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.visus_OS}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+                        
+                        <h:outputText class="named" value="#{Ophthalmologist.vgd}&emsp; #{Ophthalmologist.od} " style="position: relative;top: 5px" /> 
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.vgd_OD}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+                        <h:outputText class="named" value="&emsp; #{Ophthalmologist.os} " style="position: relative;top: 5px" /> 
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.vgd_OS}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Ophthalmologist.natureView}" style="position: relative;top: 5px" /> 
+                        <p:selectManyCheckbox  value="#{ophthalmologistController.natureView}" style="position: relative;margin-left: 20px" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            <f:selectItem class="means" itemLabel="#{Ophthalmologist.simultaneously} &emsp;" itemValue="edematous" />
+                            <f:selectItem class="means" itemLabel="#{Ophthalmologist.binocular} &emsp;" itemValue="twisted" />
+                            <f:selectItem class="means" itemLabel="#{Ophthalmologist.monocular} &emsp;" itemValue="twisted" />
+                        </p:selectManyCheckbox> 
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.natureViewField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Ophthalmologist.colorPerception} " style="position: relative;top: 5px" /> 
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.colorPerception}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Ophthalmologist.sight} " style="position: relative;top: 5px" /> 
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.sight}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Ophthalmologist.siascopy} " style="position: relative;top: 5px" /> 
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{ophthalmologistController.siascopy}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                        </p:inputTextarea>
+
+
+
+                        <div style="height: 10px;width: 100%"/>
+                        
+                        <p:panelGrid columns="3" style="text-align: center">
+                            <h:outputText class="named" value=" " /> 
+                            <h:outputText class="named" value="#{Ophthalmologist.od} "  /> 
+                            <h:outputText class="named" value="#{Ophthalmologist.os} " /> 
+
+                            <h:outputText class="named" value="#{Ophthalmologist.anteriorSegment} "  /> 
+                            <p:inputTextarea  class="textArea" value="#{ophthalmologistController.anteriorSegment_OD}"  rows="1"  style="width: 400px" >
+                                <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            </p:inputTextarea>
+                            <p:inputTextarea  class="textArea" value="#{ophthalmologistController.anteriorSegment_OS}"  rows="1" style="width: 400px" >
+                                <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            </p:inputTextarea>
+                            
+                            <h:outputText class="named" value="#{Ophthalmologist.lens} "  /> 
+                            <p:inputTextarea  class="textArea" value="#{ophthalmologistController.lens_OD}"  rows="1" style="width: 400px" >
+                                <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            </p:inputTextarea>
+                            <p:inputTextarea  class="textArea" value="#{ophthalmologistController.lens_OS}"  rows="1"  style="width: 400px">
+                                <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            </p:inputTextarea>
+                            
+                            <h:outputText class="named" value="#{Ophthalmologist.ocularFundus} "  /> 
+                            <p:inputTextarea  class="textArea" value="#{ophthalmologistController.ocularFundus_OD}"  rows="1"  style="width: 400px"  >
+                                <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            </p:inputTextarea>
+                            <p:inputTextarea  class="textArea" value="#{ophthalmologistController.ocularFundus_OS}"  rows="1" style="width: 400px"  >
+                                <p:ajax listener="#{ophthalmologistController.lisener()}"/>
+                            </p:inputTextarea>
+                            
+                            
+                        </p:panelGrid>
+
+                        
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <ui:include src="/Pages/DoctorsPagesView/DoctorsContentFooter.xhtml"/>
+                    <h:outputText class="named" value="#{msg.doctor} :    " style="float: left"/> 
+                    <h:outputText class="means" value=" #{terapevtController.doctor}" style="float: left"/> 
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                        <p:graphicImage name="/image/AjaxLoading.gif" />
+                    </p:dialog>    
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+
+
+

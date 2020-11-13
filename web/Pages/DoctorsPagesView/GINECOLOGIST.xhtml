@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{Gynecologist.gynecology}</title>
+        <h:outputStylesheet library="css-style" name="footer-style.css"/>
+        <h:outputStylesheet library="css-style" name="header-style.css"/>
+        <h:outputStylesheet library="css-style" name="terapevt-style.css"/>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+        <h:outputStylesheet library="css-style" name="doc-view-style.css"/>
+    </h:head>
+
+    <h:body>
+        <h:form id="DocForm">
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <div class = "footer">
+                        <ui:include src="/Pages/DoctorsPagesView/PagesFooter.xhtml"/>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="50"  closable="true" collapsible="true">
+                    <div class = "header">
+                    </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit  id="contenLayout" position="center">
+
+                    <p>
+                        <p:fieldset id="complaintsField"  legend="#{terMsg.complaints}"    toggleable="true" toggleSpeed="500" collapsed="">
+                            <p:inputTextarea  class="textArea" value="#{gynecologistController.complaints}"  rows="3"   style="width: 100%" >
+                                <p:ajax listener="#{gynecologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </p:fieldset>
+                    </p>
+
+                    <p>
+                        <p:fieldset id="gynecologyHistoryField"  legend="#{Gynecologist.gynecologyHistory}"    toggleable="true" toggleSpeed="500" collapsed="">
+                           <div class="flexDiv" style="border: none !important">
+                                 <h:outputText class="named" value="#{Gynecologist.menstruation}&emsp;"  style="position: relative;top: 5px"/> 
+                                <h:outputText class="named" value="#{Gynecologist.s}&emsp;"  style="position: relative;top: 5px"/> 
+                                <p:selectOneMenu  value="#{gynecologistController.menstruationFrom}" style="float: left;margin-left: 5px;">
+                                    <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                    <f:selectItem itemLabel="" itemValue="not" />
+                                    <f:selectItems value="#{gynecologistController.menstruationFromList}" />
+                                </p:selectOneMenu>
+                                <h:outputText class="named" value="#{Gynecologist.year}&emsp;,"  style="position: relative;top: 5px"/> 
+                                <h:outputText class="named" value="#{Gynecologist.throu}&emsp;"  style="position: relative;top: 5px"/> 
+                                <p:selectOneMenu  value="#{gynecologistController.menstruationAcross}" style="float: left;margin-left: 5px;">
+                                    <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                    <f:selectItem itemLabel="" itemValue="not" />
+                                    <f:selectItems value="#{gynecologistController.menstruationAcrossList}" />
+                                </p:selectOneMenu>
+                                <h:outputText class="named" value="#{Gynecologist.days}&emsp;, "  style="position: relative;top: 5px"/> 
+                                <h:outputText class="named" value="#{Gynecologist.po}&emsp;"  style="position: relative;top: 5px"/> 
+                                <p:selectOneMenu  value="#{gynecologistController.menstruationFo}" style="float: left;margin-left: 5px;">
+                                    <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                    <f:selectItem itemLabel="" itemValue="not" />
+                                    <f:selectItems value="#{gynecologistController.menstruationFoList}" />
+                                </p:selectOneMenu>
+                                <h:outputText class="named" value="#{Gynecologist.days}&emsp;, "  style="position: relative;top: 5px"/> 
+                                <h:outputText class="named" value="#{Gynecologist.staite}&emsp;"  style="position: relative;top: 5px"/> 
+
+                                <div style="height: 10px;width: 100%"/>
+                                <p:inputTextarea  class="textArea" value="#{gynecologistController.menstruationStay}"  rows="1"   style="width: 100%" >
+                                    <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                </p:inputTextarea>
+                                <div style="height: 10px;width: 100%"/>
+
+                                    <h:outputText class="named" value="#{Gynecologist.lastMenstruation}&emsp;:&emsp; "  style="position: relative;top: 5px"/> 
+                                    <p:calendar  value="#{gynecologistController.lastMaenstruationDate}" />
+                                    <h:outputText class="named" value="#{Gynecologist.Born}&emsp;:&emsp; "  style="position: relative;top: 5px"/> 
+                                    <p:calendar  value="#{gynecologistController.bornedDate}" />
+                                    <h:outputText class="named" value="#{Gynecologist.abortion}&emsp;:&emsp; "  style="position: relative;top: 5px"/> 
+                                    <p:calendar  value="#{gynecologistController.abortionDate}" />
+
+                                    <div style="height: 10px;width: 100%"/>
+                                        <h:outputText class="named" value="#{Gynecologist.genitaDiseases}&emsp;:"  /> 
+                                        <p:inputTextarea  class="textArea" value="#{gynecologistController.genitaDiseases}"  rows="1"  style="width: 100%"  >
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                        <h:outputText class="named" value="#{Gynecologist.mammaryGland}&emsp;:"  /> 
+                                        <p:inputTextarea  class="textArea" value="#{gynecologistController.mammaryGland}"  rows="1"    style="width: 100%">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+                                    
+                                    <div style="height: 10px;width: 100%"/>
+                                        <h:outputText class="named" value="#{Gynecologist.lymphNodes }&emsp;:"  style="position: relative;top: 5px"/> 
+                                        <p:selectOneMenu  value="#{gynecologistController.lymphNodes}" style="float: left;margin-left: 5px;">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="" itemValue="not" />
+                                            <f:selectItem itemLabel="#{Gynecologist.Palp}" itemValue="Palp" />
+                                            <f:selectItem itemLabel="#{Gynecologist.NoPalp}" itemValue="NoPalp" />
+                                        </p:selectOneMenu>
+                                    
+                                    <div style="height: 10px;width: 100%"/>
+                                        <p:inputTextarea  class="textArea" value="#{gynecologistController.lymphNodes}"  rows="1"   style="width: 100%" >
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.genitalStatus }&emsp;:"  style="position: relative;top: 5px"/> 
+                                    <h:outputText class="named" value="#{Gynecologist.genitals }&emsp;:"  style="position: relative;top: 5px"/> 
+                                    <div style="height: 10px;width: 100%"/>
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.genitalStatus}"  rows="1"   style="width: 100%" >
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+                                    
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.vagina }&emsp;:"  style="position: relative;top: 5px"/> 
+                                    <div style="height: 10px;width: 100%"/>
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.vagina}"  rows="1"   style="width: 100%" >
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.gervix }&emsp;:"  style="position: relative;top: 5px"/> 
+                                    <p:selectManyCheckbox  value="#{gynecologistController.gervix}" style="position: relative;margin-left: 20px" >
+                                        <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.noChange} &emsp;" itemValue="noChange" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.eroded} &emsp;" itemValue="eroded" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.defformated} &emsp;" itemValue="defformated" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.oldBags} &emsp;" itemValue="oldBags" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.flushed} &emsp;" itemValue="flushed" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.hypertrophied} &emsp;" itemValue="hypertrophied" />
+                                    </p:selectManyCheckbox>  
+                                    <div style="height: 10px;width: 100%"/>
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.gervixField}"  rows="1"   style="width: 100%" >
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.uterus }:"  style="position: relative;top: 5px"/> 
+                                    <p:selectManyCheckbox  value="#{gynecologistController.uterus}" style="position: relative;margin-left: 20px" >
+                                        <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.normalSize} &emsp;" itemValue="normalSize" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.lbigest} &emsp;" itemValue="lbigest" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.tuberous} &emsp;" itemValue="tuberous" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.smooth} &emsp;" itemValue="smooth" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.painful} &emsp;" itemValue="painful" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.painless} &emsp;" itemValue="painless" />
+                                        <f:selectItem class="means" itemLabel="#{Gynecologist.moving} &emsp;" itemValue="painless" />
+                                    </p:selectManyCheckbox>  
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.increasedTo}&emsp;"  style="position: relative;top: 5px"/> 
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.uterus1}"  rows="1" style="width: 50px">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+                                    <h:outputText class="named" value="#{Gynecologist.noMoving}&emsp;"  style="position: relative;top: 5px"/> 
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.uterus2}"  rows="1" >
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+                                    <h:outputText class="named" value="#{Gynecologist.fixed}&emsp;"  style="position: relative;top: 5px"/> 
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.uterus3}"  rows="1" >
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.righTadnexa}&emsp;"  style="position: relative;top: 5px"/> 
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.righTadnexa}"  rows="1" style="flex: 1">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.lefTadnexa}&emsp;"  style="position: relative;top: 5px"/> 
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.lefTadnexa}"  rows="1" style="flex: 1">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.vaulting}&emsp;:"  style="position: relative;top: 5px"/> 
+                                    <p:selectOneMenu  value="#{gynecologistController.vaulting}" style="float: left;margin-left: 5px;">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="" itemValue="not" />
+                                            <f:selectItem itemLabel="#{Gynecologist.free}" itemValue="free" />
+                                            <f:selectItem itemLabel="#{Gynecologist.shortened}" itemValue="shortened" />
+                                    </p:selectOneMenu>
+
+                                    <h:outputText class="named" value="#{Gynecologist.traccion}&emsp;"  style="position: relative;top: 5px"/> 
+                                    <p:selectOneMenu  value="#{gynecologistController.traccion}" style="margin-left: 5px;">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                            <f:selectItem  itemLabel="" itemValue="not" />
+                                            <f:selectItem  itemLabel="#{Gynecologist.painful}" itemValue="painful" />
+                                            <f:selectItem  itemLabel="#{Gynecologist.painless}" itemValue="painless" />
+                                    </p:selectOneMenu>
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.traccionField}"  rows="1" style="flex: 1">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+
+                                    <div style="height: 10px;width: 100%"/>
+                                    <h:outputText class="named" value="#{Gynecologist.release}&emsp;"  style="position: relative;top: 5px"/> 
+                                    <p:inputTextarea  class="textArea" value="#{gynecologistController.release}"  rows="1" style="flex: 1">
+                                            <p:ajax listener="#{gynecologistController.lisener()}"/>
+                                        </p:inputTextarea>
+                            </div>
+                        </p:fieldset>
+                    </p>
+
+                    
+                    
+                    <br/>
+                    <br/>
+                    <br/>
+                    <ui:include src="/Pages/DoctorsPagesView/DoctorsContentFooter.xhtml"/>
+                    <h:outputText class="named" value="#{msg.doctor} :    " style="float: left"/> 
+                    <h:outputText class="means" value=" #{terapevtController.doctor}" style="float: left"/> 
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                        <p:graphicImage name="/image/AjaxLoading.gif" />
+                    </p:dialog>    
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+

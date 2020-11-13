@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form id="contentForm">
+                <div id="content">
+                    <div class="personMainData"  id="personMainData">
+                        <ui:insert  name="content">
+                            <ui:include src="/Pages/templates/main_person_data_View.xhtml"/>
+                        </ui:insert>
+                    </div>
+                    <br/>
+                    <div>
+                        <p:tabView id="mainTab" dynamic="true" cache="true" >
+                    <p:tab  titleStyleClass = "titleStyle" title="#{msg.ambulanceData}">
+                        <div id="ambulanceView">
+                            <ui:insert  name="ambulanceView">
+                                <ui:include src="/Pages/templates/ambulance_data_View.xhtml"/>
+                            </ui:insert>
+                        </div>
+
+                    </p:tab>
+                    <p:tab  titleStyleClass = "titleStyle" title="#{msg.personalData}">
+                        <div class="personalView">
+                            <ui:insert  name="personalView">
+                                <ui:include src="/Pages/templates/personal_data_View.xhtml"/>
+                            </ui:insert>                        </div>
+                    </p:tab>
+                    <p:tab  titleStyleClass = "titleStyle" title="#{msg.profreid}">
+                        <div class="profreidView">
+                            <ui:include src="/Pages/templates/professional_route_data_View.xhtml"/>
+                        </div>
+                    </p:tab>
+                    <p:tab   titleStyleClass = "titleStyle" title="#{msg.job_place}">
+                        <div class="job_placeView">
+                            <ui:include src="/Pages/templates/job_place_data_View.xhtml"/>
+                        </div>
+                    </p:tab>
+                </p:tabView>
+                        
+                </div>
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                        <p:graphicImage name="/image/global_PleaseWait.gif" />
+                    </p:dialog>
+                    
+                </div>
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

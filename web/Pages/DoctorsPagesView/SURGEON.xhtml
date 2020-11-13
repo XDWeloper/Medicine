@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{Gynecologist.gynecology}</title>
+        <h:outputStylesheet library="css-style" name="footer-style.css"/>
+        <h:outputStylesheet library="css-style" name="header-style.css"/>
+        <h:outputStylesheet library="css-style" name="terapevt-style.css"/>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+        <h:outputStylesheet library="css-style" name="doc-view-style.css"/>
+    </h:head>
+
+    <h:body>
+        <h:form id="DocForm">
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <div class = "footer">
+                        <ui:include src="/Pages/DoctorsPagesView/PagesFooter.xhtml"/>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="50"  closable="true" collapsible="true">
+                    <div class = "header">
+                    </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit  id="contenLayout" position="center">
+
+                    <p>
+                        <p:fieldset id="complaintsField"  legend="#{terMsg.complaints}"    toggleable="true" toggleSpeed="500" collapsed="">
+                            <p:inputTextarea  class="textArea" value="#{surgeonController.complaints}"  rows="3"   style="width: 100%" >
+                                <p:ajax listener="#{surgeonController.lisener()}"/>
+                            </p:inputTextarea>
+                        </p:fieldset>
+                    </p>
+
+                    <div class="flexDiv" style="border: none !important">
+                        <h:outputText class="named" value="#{Surgeon.history} " style="position: relative;top: 5px" /> 
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.history}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Surgeon.trauma} " style="position: relative;top: 5px" /> 
+                        <p:selectManyCheckbox  value="#{surgeonController.trauma}" style="position: relative;margin-left: 20px" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                            <f:selectItem class="means" itemLabel="#{Surgeon.home} &emsp;" itemValue="home" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.factory} &emsp;" itemValue="factory" />
+                        </p:selectManyCheckbox>  
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.traumaField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Surgeon.objective} : " style="position: relative;top: 5px" /> 
+                        <h:outputText class="named" value="#{Surgeon.ribCage} : " style="position: relative;top: 5px" /> 
+                        <p:selectManyCheckbox  value="#{surgeonController.objective}" style="position: relative;margin-left: 20px" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                            <f:selectItem class="means" itemLabel="#{Surgeon.kyphosis} &emsp;" itemValue="kyphosis" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.scoliosis} &emsp;" itemValue="scoliosis" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.lordosis} &emsp;" itemValue="lordosis" />
+                        </p:selectManyCheckbox> 
+                        <h:outputText class="named" value="( #{Surgeon.in}" style="position: relative;top: 5px" /> 
+                        <p:selectManyCheckbox  value="#{surgeonController.lordosis}" style="position: relative;margin-left: 20px" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                            <f:selectItem class="means" itemLabel="#{Surgeon.lumbar} &emsp;" itemValue="lumbar" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.breast} " itemValue="breast" />
+                        </p:selectManyCheckbox> 
+                        <h:outputText class="named" value="#{Surgeon.spine} " style="position: relative;top: 5px" /> 
+                        <h:outputText class="named" value=")" style="position: relative;top: 5px" /> 
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.objectiveField}"  rows="1"   style="width: 100%" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Surgeon.stomach} : " style="position: relative;top: 5px" /> 
+                        <p:selectManyCheckbox  value="#{surgeonController.stomach}" style="position: relative;margin-left: 20px" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                            <f:selectItem class="means" itemLabel="#{Surgeon.soft} &emsp;" itemValue="soft" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.bb} &emsp;" itemValue="bb" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.peritonealIrritation} &emsp;" itemValue="peritonealIrritation" />
+                        </p:selectManyCheckbox> 
+                        
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Surgeon.hernias} : " style="position: relative;top: 5px" /> 
+                        <p:selectManyCheckbox  value="#{surgeonController.hernias}" style="position: relative;margin-left: 20px" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                            <f:selectItem class="means" itemLabel="#{Surgeon.groin} &emsp;" itemValue="groin" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.navel} &emsp;" itemValue="navel" />
+                        </p:selectManyCheckbox> 
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.herniasField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+                        
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Surgeon.joints} : " style="position: relative;top: 5px" /> 
+                        <p:selectManyCheckbox  value="#{surgeonController.joints}" style="position: relative;margin-left: 20px" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                            <f:selectItem class="means" itemLabel="#{Surgeon.edematous} &emsp;" itemValue="edematous" />
+                            <f:selectItem class="means" itemLabel="#{Surgeon.twisted} &emsp;" itemValue="twisted" />
+                        </p:selectManyCheckbox> 
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.jointsField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+                        
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Surgeon.jointsMove} : " style="position: relative;top: 5px" /> 
+                        <p:selectOneMenu  value="#{surgeonController.jointsMove}" style="margin-left: 5px;">
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                            <f:selectItem itemLabel="" itemValue="not" />
+                            <f:selectItem itemLabel="#{Surgeon.full}" itemValue="full" />
+                            <f:selectItem itemLabel="#{Surgeon.limited}" itemValue="limited" />
+                        </p:selectOneMenu>
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.jointsMoveField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+                        
+                        <h:outputText class="named" value="#{Surgeon.containers} : " style="position: relative;top: 5px" /> 
+
+                        <div style="height: 10px;width: 100%"/>
+                        
+                        <h:outputText class="named" value="#{Surgeon.veins} " style="position: relative;top: 5px;margin-left: 25px" />
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.veinsField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <h:outputText class="named" value="#{Surgeon.artery} " style="position: relative;top: 5px;margin-left: 25px" /> 
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.arteryField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{Surgeon.st_localis} " style="position: relative;top: 5px" /> 
+                        <p:inputTextarea  class="textArea" value="#{surgeonController.st_localisField}"  rows="1"   style="flex: 1" >
+                            <p:ajax listener="#{surgeonController.lisener()}"/>
+                        </p:inputTextarea>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <ui:include src="/Pages/DoctorsPagesView/DoctorsContentFooter.xhtml"/>
+                    <h:outputText class="named" value="#{msg.doctor} :    " style="float: left"/> 
+                    <h:outputText class="means" value=" #{terapevtController.doctor}" style="float: left"/> 
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                        <p:graphicImage name="/image/AjaxLoading.gif" />
+                    </p:dialog>    
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition >
+        <h:form id="main_Person_Data_Form">
+            
+            <h:panelGrid columns="2" id="person_Panel" class="person_Panel">
+                <f:facet name="header" class="lefttext" >
+                    <h2>
+                    <p> #{msg.ambulance_number} &lrm;   #{msg.num} &lrm; #{indexController.selectPerson.cardNum} &lrm; #{msg.ot} &lrm; 
+                            <h:outputText value="#{indexController.selectPerson.cardDate}" >
+                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                            </h:outputText>
+                        </p>
+                    </h2>
+                </f:facet>
+                
+                <h:outputText class="named" value="#{msg.person}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.firstname} &lrm;#{indexController.selectPerson.middlename} &lrm; #{indexController.selectPerson.lastname}" title="#{msg.person}"/>
+
+                <h:outputText class="named" value="#{msg.sex}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.sex}" title="#{msg.sex}"/>
+
+                <h:outputText class="named" value="#{msg.born_date}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.bornData}" title="#{msg.born_date}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText> 
+                
+                <h:outputText class="named" value="#{msg.age}:"/>
+                <h:outputText class="means" value="#{indexController.age}" title="#{msg.age}"/>
+                
+                <h:outputText class="named" value="#{msg.inshurance_company}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.medInshur}" title="#{msg.inshurance_company}"/>
+                
+                <h:outputText class="named" value="#{msg.polis_OMC_seriya}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.polisser}" title="#{msg.polis_OMC_seriya}"/>
+                
+                <h:outputText class="named" value="#{msg.polis_OMC_number}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.polisnum}" title="#{msg.polis_OMC_number}"/>
+                
+                <h:outputText class="named" value="#{msg.snils}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.snils}" title="#{msg.snils}"/>
+                
+                <h:outputText class="named" value="#{msg.subject}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.region}" title="#{msg.subject}"/>
+                
+                <h:outputText class="named" value="#{msg.district}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.area}" title="#{msg.district}"/>
+                
+                <h:outputText class="named" value="#{msg.city}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.city}" title="#{msg.city}"/>
+                
+                <h:outputText class="named" value="#{msg.locality}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.locality}" title="#{msg.locality}"/>
+                
+                <h:outputText class="named" value="#{msg.street}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.street}" title="#{msg.street}"/>
+                
+                <h:outputText class="named" value="#{msg.house}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.house}" title="#{msg.house}"/>
+                
+                <h:outputText class="named" value="#{msg.flat}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.flat}" title="#{msg.flat}"/>
+                
+                <h:outputText class="named" value="#{msg.area}:"/>
+                <h:outputText class="means" value="#{indexController.selectPerson.adress.place}" title="#{msg.area}"/>
+                
+                </h:panelGrid>
+            </h:form>
+    </ui:composition>
+
+</html>

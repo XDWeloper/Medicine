@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+                        <p>
+                            <p:fieldset  id="diagnosisField" legend="#{terMsg.diagnosis}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:dataTable id="mkbDiagnos" var="mkb" value="#{footerController.diagnosMkbSellected}"  selection="#{footerController.sellectedDiagnosRemove}"  rowKey="#{mkb.mkbId}" selectionMode="multiple">
+                                    <f:facet name="header">
+                                        #{msg.mkbName}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton value="#{terMsg.addDiagnosis}" icon="ui-icon-circle-plus" onclick="PF('mkbRef').show();" actionListener="#{footerController.setFieldseType('diagnosis')}" />
+                                    <p:commandButton value="#{terMsg.delDiagnosis}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeDiagnos()}" update="@([id$=mkbDiagnos])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>
+
+                        <p:dialog id="MKBdialogWin" widgetVar="mkbRef" header="#{msg.mkbReference}" showHeader="true" height="680px" width="950px" minWidth="950" 
+                                  dynamic="true" draggable="true" resizable="true" closable="false" >
+                            <p:ajax event="open" update="tree mkbTable"/>
+                            <div id="mkbDiv" style="height: 90%;width: 100%; border: 1px solid brown;display: flex; flex-direction:  row" >
+                                <p:treeTable id="tree" value="#{mkbController.root}" var="mkb" selectionMode="single" selection="#{mkbController.selectedNode}" 
+                                             style="float: left;width: 50%" scrollable="true" scrollHeight="100%" >
+                                    <f:facet name="header"> #{terMsg.mkbClasses} </f:facet>
+                                    <p:ajax event="select" listener="#{mkbController.onSelectedMkbClass()}"  update="@([id$=mkbTable])"/>
+                                    <p:column headerText="#{msg.mkbClassName}">
+                                        <h:outputText value="#{mkb.mkbClassName}" />
+                                    </p:column>
+                                </p:treeTable>
+
+                                <p:dataTable id="mkbTable" var="mkb" value="#{mkbController.mkbList}" selection="#{mkbController.mkbSellected}" rowKey="#{mkb.mkbId}" style="margin-left: 5px;width: 48%;float: left"
+                                             scrollable="true" scrollHeight="100%" scrollWidth="49%">
+                                    <f:facet name="header"> #{msg.mkbClassName}</f:facet>
+                                    <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                                    <p:column headerText="#{msg.code}" style="width:30px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                            <div class="footer" style="height: 50px">
+                                <p:commandLink class="addButt" id="mkbsave" value="#{msg.save}" onclick="PF('mkbRef').hide();"  actionListener="#{mkbController.onSaveButton()}"  />
+                                <p:commandLink class="remButt" id="mkbcancel" value="#{msg.cancel}" onclick="PF('mkbRef').hide();" actionListener="#{mkbController.onCloseButton()}" />                                                        
+                            </div>
+                        </p:dialog>
+
+                        <p>
+                            <p:fieldset  id="osmotrRezField" legend="#{terMsg.osmotrRez}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:selectManyCheckbox  value="#{footerController.sellectedosmotrRez}"  >
+                                    <p:ajax listener="#{footerController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.medicalCotraindicationsIdentified} &emsp;" itemValue="ident" />
+                                    <f:selectItem class="means" itemLabel="#{terMsg.zakl} &emsp; " itemValue="gift" />
+                                </p:selectManyCheckbox>                                  
+                                <br/>
+                                <h:outputText class="named" value="#{terMsg.contraindicationHazard} :" />
+                                <p:selectManyCheckbox  value="#{footerController.sellectedContraindication}"   style="float: right;top: -5px">
+                                    <p:ajax listener="#{footerController.lisen()}"/>
+                                    <f:selectItem class="means" itemLabel="#{terMsg.allways} &emsp;" itemValue="allways" />
+                                </p:selectManyCheckbox>                                  
+                                <div style="clear: both"/>
+                                <p:dataTable id="formHazTable"    var="haz" value="#{footerController.hazSellected}"  selection="#{footerController.hazSellForRemove}" rowKey="#{haz.hazId}" selectionMode="multiple" >
+                                    <f:facet name="header">
+                                        #{msg.hazFact}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{haz.hazCode}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.groupName}">
+                                        <h:outputText value="#{haz.hazGroupName}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{haz.hazName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton  value="#{msg.addHaz}" icon="ui-icon-circle-plus" onclick="PF('HazRef').show();" />
+                                    <p:commandButton value="#{msg.dellHaz}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeHazard()}" update="@([id$=formHazTable])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>
+
+                        <p:dialog id="HazDialogWin" widgetVar="HazRef" header="#{msg.hazRefernce}" showHeader="true" height="680px" width="950px" minWidth="950" 
+                                  dynamic="true" draggable="true" resizable="true" closable="false" maximizable="true" >
+                            <p:ajax event="open" update="HazTable"/>
+                            <div id="HazDiv" style="height: 90%;width: 100%; border: 1px solid brown" >
+                                <p:dataTable id="HazTable" var="haz" value="#{hazardController.hazList}" selection="#{hazardController.sellectedHaz}" rowKey="#{haz.hazId}" scrollable="true" scrollHeight="100%" >
+                                    <f:facet name="header"> #{msg.hazarTableName}</f:facet>
+                                    <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{haz.hazCode}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.groupName}">
+                                        <h:outputText value="#{haz.hazGroupName}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{haz.hazName}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                            <div class="footer" style="height: 50px">
+                                <p:commandLink  class="addButt" value="#{msg.save}" onclick="PF('HazRef').hide();"   update="@([id$=formHazTable])" actionListener="#{hazardController.onSaveButton()}"  />
+                                <p:commandLink  class="remButt" value="#{msg.cancel}" onclick="PF('HazRef').hide();" actionListener="#{hazardController.onCloseButton()}" />                                                        
+                            </div>
+                        </p:dialog>
+
+                        <p>
+                            <p:fieldset id="recomendationField"  legend="#{msg.recomendation}"    toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}">
+                                <p:inputTextarea  class="textArea" value="#{footerController.recomendation}"  rows="3"   style="width: 100%" >
+                                    <p:ajax listener="#{footerController.lisen()}"/>
+                                </p:inputTextarea>
+                            </p:fieldset>
+                        </p>
+            
+                        <p>
+                            <p:fieldset  id="SurveyField" legend="#{msg.upSurvey}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:dataTable id="SurveyDiagnos" var="mkb" value="#{footerController.surveyMkbSellected}"  selection="#{footerController.sellectedSurveyRemove}"  
+                                             rowKey="#{mkb.mkbId}" selectionMode="multiple">
+                                    <f:facet name="header">
+                                        #{msg.mkbName}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton value="#{terMsg.addDiagnosis}" icon="ui-icon-circle-plus" onclick="PF('mkbRef').show();" actionListener="#{footerController.setFieldseType('survey')}" />
+                                    <p:commandButton value="#{terMsg.delDiagnosis}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeSurvey()}" update="@([id$=SurveyDiagnos])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>            
+            
+                        <p>
+                            <p:fieldset  id="upSurveyField" legend="#{msg.upSurveyProf}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:dataTable id="upSurveyProfDiagnos" var="mkb" value="#{footerController.centerSurveyMkbSellected}"  selection="#{footerController.sellectedCenterSurveyRemove}"  
+                                             rowKey="#{mkb.mkbId}" selectionMode="multiple">
+                                    <f:facet name="header">
+                                        #{msg.mkbName}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton value="#{terMsg.addDiagnosis}" icon="ui-icon-circle-plus" onclick="PF('mkbRef').show();" actionListener="#{footerController.setFieldseType('surveyprof')}" />
+                                    <p:commandButton value="#{terMsg.delDiagnosis}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeCenterSurvey()}" update="@([id$=upSurveyProfDiagnos])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>            
+            
+                        <p>
+                            <p:fieldset  id="ambulanceTreatmentField" legend="#{msg.ambulanceTreatment}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:dataTable id="ambulanceTreatmentDiagnos" var="mkb" value="#{footerController.ambulanceTreatmentMkbSellected}"  selection="#{footerController.sellectedAmbulanceTreatmentRemove}"  
+                                             rowKey="#{mkb.mkbId}" selectionMode="multiple">
+                                    <f:facet name="header">
+                                        #{msg.mkbName}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton value="#{terMsg.addDiagnosis}" icon="ui-icon-circle-plus" onclick="PF('mkbRef').show();" actionListener="#{footerController.setFieldseType('ambulanceTreatment')}" />
+                                    <p:commandButton value="#{terMsg.delDiagnosis}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeAmbulanceTreatment()}" update="@([id$=ambulanceTreatmentDiagnos])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>            
+            
+                        <p>
+                            <p:fieldset  id="holdTreatmentField" legend="#{msg.holdTreatment}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:dataTable id="holdTreatmentDiagnos" var="mkb" value="#{footerController.holdTreatmentMkbSellected}"  selection="#{footerController.sellectedHoldTreatmentRemove}"  
+                                             rowKey="#{mkb.mkbId}" selectionMode="multiple">
+                                    <f:facet name="header">
+                                        #{msg.mkbName}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton value="#{terMsg.addDiagnosis}" icon="ui-icon-circle-plus" onclick="PF('mkbRef').show();" actionListener="#{footerController.setFieldseType('holdTreatment')}" />
+                                    <p:commandButton value="#{terMsg.delDiagnosis}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeHoldTreatment()}" update="@([id$=holdTreatmentDiagnos])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>            
+            
+                        <p>
+                            <p:fieldset  id="sanatoriumTreatmentField" legend="#{msg.sanatoriumTreatment}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:dataTable id="sanatoriumTreatmentDiagnos" var="mkb" value="#{footerController.sanatoriumTreatmentMkbSellected}"  selection="#{footerController.sellectedSanatoriumTreatmentRemove}"  
+                                             rowKey="#{mkb.mkbId}" selectionMode="multiple">
+                                    <f:facet name="header">
+                                        #{msg.mkbName}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton value="#{terMsg.addDiagnosis}" icon="ui-icon-circle-plus" onclick="PF('mkbRef').show();" actionListener="#{footerController.setFieldseType('sanatoriumTreatment')}" />
+                                    <p:commandButton value="#{terMsg.delDiagnosis}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeSanatoriumTreatment()}" update="@([id$=sanatoriumTreatmentDiagnos])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>            
+            
+                        <p>
+                            <p:fieldset  id="dispensaryLookingField" legend="#{msg.dispensaryLooking}" toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:dataTable id="dispensaryLookingDiagnos" var="mkb" value="#{footerController.dispensaryLookingMkbSellected}"  selection="#{footerController.sellectedDispensaryLookingRemove}"  
+                                             rowKey="#{mkb.mkbId}" selectionMode="multiple">
+                                    <f:facet name="header">
+                                        #{msg.mkbName}
+                                    </f:facet>
+                                    <p:column headerText="#{msg.code}" style="width:50px;text-align:center">
+                                        <h:outputText value="#{mkb.mkbId}" />
+                                    </p:column>
+                                    <p:column headerText="#{msg.haz_name}">
+                                        <h:outputText value="#{mkb.mkbName}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p>
+                                    <p:commandButton value="#{terMsg.addDiagnosis}" icon="ui-icon-circle-plus" onclick="PF('mkbRef').show();" actionListener="#{footerController.setFieldseType('dispensaryLooking')}" />
+                                    <p:commandButton value="#{terMsg.delDiagnosis}" icon="ui-icon-circle-minus" actionListener="#{footerController.removeDispensaryLooking()}" update="@([id$=dispensaryLookingDiagnos])"/>
+                                </p>
+                            </p:fieldset>
+                        </p>
+                        <br/>            
+                        <div style="display: flex;flex-direction: row">
+                            <h:outputText  class="named" value="#{msg.healthGroup}"  style="position: relative;top: 5px"/>
+                            <p:selectManyCheckbox  value="#{footerController.sellectedhealthGroup}" style="margin-left: 20px" >
+                                <p:ajax listener="#{terapevtController.lisen()}"/>
+                                <f:selectItem  itemLabel="#{msg.d1} &emsp;" itemValue="d1" />
+                                <f:selectItem  itemLabel="#{msg.d2} &emsp;" itemValue="d2" />
+                                <f:selectItem  itemLabel="#{msg.d3} &emsp;" itemValue="d3" />
+                                <f:selectItem  itemLabel="#{msg.d4} &emsp;" itemValue="d4" />
+                                <f:selectItem  itemLabel="#{msg.d5} &emsp;" itemValue="d5" />
+                            </p:selectManyCheckbox>                                  
+                        </div>    
+                        <br/>
+                        <br/>
+                        <br/>
+        </ui:composition>
+    </h:body>
+</html>
+

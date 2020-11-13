@@ -1,0 +1,175 @@
+#mainDiv{
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    border: solid 1px white;
+    top: 0;
+    left: 0;
+}
+
+#header{
+    border-radius: 5px;
+    width: 100%;
+    height: 100px;
+    background-color: #2B579A;
+    font-family: Verdana !important;
+
+}
+#welcomeName{
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  width: 500px;
+ }
+#exit{
+  position: absolute;
+  top: 80px;
+  right: 50px;
+}
+.console {
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+.named {
+    font-weight: bold;
+    padding-left: 10px;
+        font-family: Verdana !important;
+
+}
+.means{
+    color: #2B579A;
+    font-weight: bold;
+    padding-left: 10px;
+        font-family: Verdana !important;
+
+}
+#allContent{
+    position: relative;
+    top: 10px;
+    overflow: hidden;
+    min-width: 1117px;
+}
+
+#leftContent{
+    width: 420px;
+    float: left;
+        font-family: Verdana !important;
+
+}
+
+#content{
+    float: right;
+    width: 100%;
+        font-family: Verdana !important;
+
+}
+#mainTab{
+}
+#footer{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #2B579A;
+    color: white;
+    border-radius: 5px;
+        font-family: Verdana!important;
+
+}
+
+
+.pastTime{
+/*    background-color: darkgreen  !important;
+    background-image:none !important ;
+    border-color: white !important;*/
+}
+.nowTime{
+    font-weight: bolder;
+    background-image:none !important ;
+    border: 2px solid green !important;
+}
+.priemTime{
+    margin-left: 0;
+    transition: all 0.5s;
+    font-weight: normal;
+}
+.priemTime:hover{
+    margin-left: 5px;
+    font-weight: bold;
+}
+.columnHeaderTime {
+    font-size: 12px;
+    width: 27%;
+    font-family: Verdana !important;
+
+}
+.columnHeaderName {
+    font-size: 12px;
+    font-family: Verdana !important;
+
+}
+
+#personMainData{
+    padding-left: 20px;
+}
+
+.titleStyle{
+ font-size: 12px;
+ font-family: Verdana !important;
+
+}
+
+div.ui-widget{
+    font-size: 12px;
+    font-family: Verdana !important;
+}
+
+#ambulanceView{
+    font-size: 12px;
+    font-family: Verdana !important;
+}
+div.ui-datepicker td text{
+color: red;
+font-family: Verdana !important;
+}
+div.ui-datepicker  {
+    font-weight: bold;
+    color:  red;
+    font-family: Verdana !important;
+}
+.wait{
+    background: none !important;  
+    border: none !important;
+    box-shadow: none !important;
+}
+.rezForm{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+.ui-inputfield{
+     box-shadow: none !important;
+     box-shadow: none;
+    color: #2B579A !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+            font-family: Verdana !important;
+
+/*    border: 1px solid brown !important;*/
+}
+
+.innerTable thead {
+    display:none;
+}
+.ui-datatable.innerTable thead th,
+.ui-datatable.innerTable tbody,
+.ui-datatable.innerTable tbody tr,
+.ui-datatable.innerTable tbody td {
+    border-style: none;
+    padding: 0 !important;
+}
+
+.ui-datatable-resizable thead th, .ui-datatable-resizable tbody td, .ui-datatable-resizable tfoot td {
+    padding: 0 !important;
+            }

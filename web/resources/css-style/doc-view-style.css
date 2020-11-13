@@ -1,0 +1,10 @@
+.flexDiv{
+    border: 1px solid #2B579A;
+    display: flex; 
+    flex-direction:  row;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 10px;
+        font-family: Verdana !important;
+
+}

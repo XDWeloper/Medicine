@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{Dentist.dentist}</title>
+        <h:outputStylesheet library="css-style" name="footer-style.css"/>
+        <h:outputStylesheet library="css-style" name="header-style.css"/>
+        <h:outputStylesheet library="css-style" name="terapevt-style.css"/>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+        <h:outputStylesheet library="css-style" name="doc-view-style.css"/>
+    </h:head>
+
+    <h:body>
+        <h:form id="DocForm">
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <div class = "footer">
+                        <ui:include src="/Pages/DoctorsPagesView/PagesFooter.xhtml"/>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="50"  closable="true" collapsible="true">
+                    <div class = "header">
+                    </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit  id="contenLayout" position="center">
+                    <div class="flexDiv" style="border: none !important">
+                        <div style="height: 20px;width: 100%"/>
+
+                        <h:outputText class="named" value="#{terMsg.complaints}" style="position: relative;top: 5px" />
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{dentistController.complaints}"  rows="3"   style="flex: 1" >
+                            <p:ajax listener="#{dentistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+                        
+                        <h:outputText class="named" value="#{Dentist.objective}" style="position: relative;top: 5px" />
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{dentistController.objective}"  rows="3"   style="flex: 1" >
+                            <p:ajax listener="#{dentistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+                        
+                        <h:outputText class="named" value="#{Dentist.bite}" style="position: relative;top: 5px" />
+                        <div style="width: 20px"/>
+                        <p:inputTextarea  class="textArea" value="#{dentistController.bite}"  rows="3"   style="flex: 1" >
+                            <p:ajax listener="#{dentistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+                        
+                        <h:outputText class="named" value="#{Dentist.x_ray}" />
+                        <p:inputTextarea  class="textArea" value="#{dentistController.x_ray}"  rows="3"   style="width: 100%" >
+                            <p:ajax listener="#{dentistController.lisener()}"/>
+                        </p:inputTextarea>
+
+                        <div style="height: 10px;width: 100%"/>
+                        <h:outputText class="named" value="#{Dentist.conclusion} " style="position: relative;top: 5px" />
+                        <p:selectOneMenu  value="#{dentistController.oralCavity}" >
+                            <p:ajax listener="#{dentistController.lisener()}"/>
+                            <f:selectItem itemLabel="" itemValue="not" />
+                            <f:selectItem itemLabel="#{Dentist.sanitized}" itemValue="sanitized" />
+                            <f:selectItem itemLabel="#{Dentist.noSanitized}" itemValue="noSanitized" />
+                        </p:selectOneMenu>
+        
+                    </div>  
+                         
+                    
+                    <br/>
+                    <br/>
+                    <ui:include src="/Pages/DoctorsPagesView/DoctorsContentFooter.xhtml"/>
+                    <h:outputText class="named" value="#{msg.doctor} :    " style="float: left"/> 
+                    <h:outputText class="means" value=" #{terapevtController.doctor}" style="float: left"/> 
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                        <p:graphicImage name="/image/AjaxLoading.gif" />
+                    </p:dialog>    
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+
+
+

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Страница бухгалтера</title>
+           <h:outputStylesheet library="css-style" name="index-style.css"/>
+           <h:outputScript name="calendar_ru.js" library="js"/>
+           <f:facet name="first">
+           <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+           <link rel="shortcut icon" href="resources/image/9-512.ico" type="image/x-icon"/>
+           </f:facet>        
+    </h:head>
+    <h:body>
+        <form>
+        <p:layout fullPage="true" >
+
+            <p:layoutUnit position="north" size="110"  closable="true" collapsible="true" >
+                <ui:include src="/Pages/templates/headerPage_1.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                <ui:include src="/Pages/templates/footerPage.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="445" header="Перечень доступных отчетов" collapsible="true" resizable="true" minSize="400" maxSize="450">
+                <p:dataTable id="reportlist" var="report" value="#{counterController.reportList}" selectionMode="single" selection="#{counterController.sellectedReport}"
+                             rowKey="#{report.reportId}" >
+                    <p:ajax event="rowSelect" listener="#{counterController.onReportSelect}" />
+                    <p:column headerText="ID" styleClass="columnHeaderTime">
+                        <h:outputText  class="priemTime" value="#{report.reportId}" /> 
+                    </p:column>
+                    <p:column headerText="Наименование отчета" styleClass="columnHeaderName">
+                        <h:outputText  class="priemTime" value="#{report.reportName}" /> 
+                    </p:column>
+                </p:dataTable>                
+            </p:layoutUnit>
+
+            <p:layoutUnit  position="east" size="400" header="Выбрать сотрудника" collapsible="true" resizable="true" minSize="200" maxSize="400" 
+                           collapsed="#{counterController.doctorListCollapse}" >
+                <p:dataTable id="doctorlist" var="doctors" value="#{counterController.doctorsList}" selectionMode="single" selection="#{counterController.sellectedDoctors}"
+                             rowKey="#{doctors.iddoctor}" >
+                    <p:ajax event="rowSelect" listener="#{counterController.onDoctorSelect()}" />
+                    <p:column headerText="Ф.И.О." styleClass="columnHeaderTime">
+                        <h:outputText  class="priemTime" value="#{doctors.lastname}&emsp;#{doctors.firstname}&emsp;#{doctors.middlename}" /> 
+                    </p:column>
+                </p:dataTable>                
+                
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+            </p:layoutUnit>
+
+        </p:layout>    
+        </form>
+    </h:body>
+</html>
+

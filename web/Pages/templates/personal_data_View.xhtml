@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+   
+    <ui:composition >
+        <h:form id="personal_data_View_Form">
+            
+            <h:panelGrid columns="4" id="personal_Panel"  >
+                
+                <h:outputText class="named" value="#{msg.family}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.prideState}" title="#{msg.family}"/>
+                
+                <h:outputText class="named" value="#{msg.education}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.education}" title="#{msg.education}"/>
+                
+                <h:outputText class="named" value="#{msg.busy}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.business}" title="#{msg.busy}"/>
+                
+                <h:outputText class="named" value="#{msg.passport}" />
+                <h:outputText class="means" value="#{msg.doc_series}: #{indexController.selectPerson.passSer} #{msg.doc_number}: #{indexController.selectPerson.passNum}" />
+
+                <h:outputText class="named" value="#{msg.passport_give}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.passPlace}" title="#{msg.passport_give}"/>
+
+                <h:outputText class="named" value="#{msg.passport_day}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.passDate}" title="#{msg.passport_day}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText>
+
+                <h:outputText class="named" value="#{msg.contact_phone}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.phone}" title="#{msg.contact_phone}"/>
+                
+                <h:outputText class="named" value="#{msg.Email}:" />
+                <h:outputText class="means" value="#{indexController.selectPerson.email}" title="#{msg.Email}"/>
+                
+                
+            </h:panelGrid>
+                <br/>
+                <p:dataTable id="allergylist" var="item" value="#{ambulanceDataController.personsIllnessList}" rendered="#{ambulanceDataController.personsIllnessList.size() > 0}" >
+                    <f:facet name="header" class="lefttext" >
+                        #{msg.dispansers_ill}"
+                    </f:facet>
+
+                    <p:column headerText="#{msg.start_date}" styleClass="columnHeaderTime" style="text-align: center">
+                        <h:outputText  class="means" value="#{item.start_date}" ><f:convertDateTime pattern="dd.MM.yyyy" /></h:outputText> 
+                    </p:column>
+
+                    <p:column headerText="#{msg.end_date}" styleClass="columnHeaderTime" style="text-align: center">
+                        <h:outputText  class="means" value="#{item.end_date}"><f:convertDateTime pattern="dd.MM.yyyy" /></h:outputText> 
+                    </p:column>
+
+                    <p:column headerText="#{msg.diagnosis}" styleClass="columnHeaderTime" style="text-align: center">
+                        <h:outputText  class="means" value="#{item.diagnosis}"/> 
+                    </p:column>
+
+                    <p:column headerText="#{msg.mkb_code}" styleClass="columnHeaderTime" style="text-align: center">
+                        <h:outputText  class="means" value="#{item.mkb_code}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msg.doctor}" styleClass="columnHeaderTime" style="text-align: center">
+                        <h:outputText  class="means" value="#{item.doctor}"/>
+                    </p:column>
+                    
+
+                    
+                </p:dataTable>
+            
+        </h:form>
+    </ui:composition>
+</html>
+

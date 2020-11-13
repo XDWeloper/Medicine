@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{Otolaryngologist.otorinolaringology}</title>
+        <h:outputStylesheet library="css-style" name="footer-style.css"/>
+        <h:outputStylesheet library="css-style" name="header-style.css"/>
+        <h:outputStylesheet library="css-style" name="terapevt-style.css"/>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+        <h:outputStylesheet library="css-style" name="doc-view-style.css"/>
+    </h:head>
+
+    <h:body>
+        <h:form id="DocForm">
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <div class = "footer">
+                        <ui:include src="/Pages/DoctorsPagesView/PagesFooter.xhtml"/>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="50"  closable="true" collapsible="true">
+                    <div class = "header">
+                    </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit  id="contenLayout" position="center">
+
+                    <p>
+                        <p:fieldset id="complaintsField"  legend="#{terMsg.complaints}"    toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}">
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.complaints}"  rows="3"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </p:fieldset>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.nasalBreathing} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.nasalBreathingCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.adequate} &emsp;" itemValue="adequate" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.difficult} &emsp;" itemValue="difficult" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.partDifficult} &emsp;" itemValue="partDifficult" />
+                            </p:selectManyCheckbox>  
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.nasalBreathing}"  rows="1"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </div>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.mucous} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.mucousCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.pink} &emsp;" itemValue="pink" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.flushed} &emsp;" itemValue="flushed" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.hypertrophied} &emsp;" itemValue="hypertrophied" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.thinned} &emsp;" itemValue="thinned" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.injected} &emsp;" itemValue="injected" />
+                            </p:selectManyCheckbox>  
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.mucous}"  rows="1"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </div>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.nasalSeptum} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.nasalSeptumCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.notRejected} &emsp;" itemValue="notRejected" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.rejectedRight} &emsp;" itemValue="rejectedRight" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.toLeft} &emsp;" itemValue="toLeft" />
+                            </p:selectManyCheckbox>  
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.nasalSeptum}"  rows="1"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </div>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.pharynx} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.pharynxCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.mucousPink} &emsp;" itemValue="mucousPink" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.edematous} &emsp;" itemValue="edematous" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.irritated} &emsp;" itemValue="irritated" />
+                            </p:selectManyCheckbox>  
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.pharynx}"  rows="1"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </div>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.palatineTonsils} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.palatineTonsilsCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.small} &emsp;" itemValue="mucousPink" />
+                            </p:selectManyCheckbox>  
+                            <h:outputText class="named" value="#{Otolaryngologist.increased} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.palatineTonsilsCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="1 &emsp;" itemValue="1" />
+                                <f:selectItem class="means" itemLabel="2 &emsp;" itemValue="2" />
+                                <f:selectItem class="means" itemLabel="3 &emsp;" itemValue="3" />
+                            </p:selectManyCheckbox> 
+                            <h:outputText class="named" value="#{Otolaryngologist.stage}. "  style="position: relative;top: 5px"/> 
+                        </div>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.larynx} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.larynxCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.enteryFree} &emsp;" itemValue="enteryFree" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.mucousPink} &emsp;" itemValue="mucousPink" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.flushed} &emsp;" itemValue="flushed" />
+                            </p:selectManyCheckbox>  
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.larynx}"  rows="1"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </div>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.vocalFolds} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.vocalFoldsCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.pale} &emsp;" itemValue="pale" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.flushed} &emsp;" itemValue="flushed" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.edematous} &emsp;" itemValue="edematous" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.twisted} &emsp;" itemValue="twisted" />
+                            </p:selectManyCheckbox>  
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.vocalFolds}"  rows="1"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </div>
+                    </p>
+
+                    <p>
+                        <p:fieldset id="otoscopyField" legend="#{Otolaryngologist.otoscopy} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                            <div class="flexDiv" style="border: none !important">
+                                <h:outputText class="named" value="AD : "  style="position: relative;top: 5px"/> 
+                                <p:selectManyCheckbox  value="#{otolaryngologistController.otoscopyCheck1}" style="position: relative;margin-left: 20px" >
+                                    <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.bp} &emsp;" itemValue="bp" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.gray} &emsp;" itemValue="gray" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.retracted} &emsp;" itemValue="retracted" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.thickened} &emsp;" itemValue="thickened" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.flushed} &emsp;" itemValue="flushed" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.perforation} &emsp;" itemValue="perforation" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.hr} &emsp;" itemValue="hr" />
+                                </p:selectManyCheckbox>  
+                                <p:inputTextarea  class="textArea" value="#{otolaryngologistController.otoscopy1}"  rows="1"   style="width: 100%" >
+                                    <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                </p:inputTextarea>
+                            </div>
+                            <div class="flexDiv" style="border: none !important">
+                                <h:outputText class="named" value="AS : "  style="position: relative;top: 5px"/> 
+                                <p:selectManyCheckbox  value="#{otolaryngologistController.otoscopyCheck2}" style="position: relative;margin-left: 20px" >
+                                    <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.bp} &emsp;" itemValue="bp" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.gray} &emsp;" itemValue="gray" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.retracted} &emsp;" itemValue="retracted" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.thickened} &emsp;" itemValue="thickened" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.flushed} &emsp;" itemValue="flushed" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.perforation} &emsp;" itemValue="perforation" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.hr} &emsp;" itemValue="hr" />
+                                </p:selectManyCheckbox>  
+                                <p:inputTextarea  class="textArea" value="#{otolaryngologistController.otoscopy2}"  rows="1"   style="width: 100%" >
+                                    <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                </p:inputTextarea>
+                            </div>
+                        </p:fieldset>
+                    </p>
+                    
+                    <p>
+                        <p:fieldset id="audiometryDataField" legend="#{Otolaryngologist.audiometryData} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                            <div class="flexDiv" style="border: none !important">
+                                <h:outputText class="named" value="#{Otolaryngologist.date} : "  style="position: relative;top: 5px"/> 
+                                <p:calendar  value="#{otolaryngologistController.audiometryDate}" />
+                            </div>
+                            <div class="flexDiv" style="border: none !important">
+                                <h:outputText class="named" value="#{Otolaryngologist.audiometry} : "  style="position: relative;top: 5px"/> 
+                                <p:selectManyCheckbox  value="#{otolaryngologistController.audiometryCheck}" style="position: relative;margin-left: 20px" >
+                                    <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.norma} &emsp;" itemValue="bp" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.both} &emsp;" itemValue="gray" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.left} &emsp;" itemValue="retracted" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.right} &emsp;" itemValue="thickened" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.hearingLoss} &emsp;" itemValue="flushed" />
+                                    <f:selectItem class="means" itemLabel="#{Otolaryngologist.noiseSign} &emsp;" itemValue="perforation" />
+                                </p:selectManyCheckbox>  
+                                <p:inputTextarea  class="textArea" value="#{otolaryngologistController.audiometry}"  rows="1"   style="width: 100%" >
+                                    <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                </p:inputTextarea>
+                            </div>
+                        </p:fieldset>
+                    </p>
+
+                    <p>
+                        <div class="flexDiv">
+                            <h:outputText class="named" value="#{Otolaryngologist.vestibularApparatus} : "  style="position: relative;top: 5px"/> 
+                            <p:selectManyCheckbox  value="#{otolaryngologistController.vestibularApparatusCheck}" style="position: relative;margin-left: 20px" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.bp} &emsp;" itemValue="mucousPink" />
+                                <f:selectItem class="means" itemLabel="#{Otolaryngologist.vestibulopathy} &emsp;" itemValue="edematous" />
+                            </p:selectManyCheckbox>  
+                            <p:inputTextarea  class="textArea" value="#{otolaryngologistController.vestibularApparatus}"  rows="1"   style="width: 100%" >
+                                <p:ajax listener="#{otolaryngologistController.lisener()}"/>
+                            </p:inputTextarea>
+                        </div>
+                    </p>
+                    
+                    
+                    
+                    
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <ui:include src="/Pages/DoctorsPagesView/DoctorsContentFooter.xhtml"/>
+                    <h:outputText class="named" value="#{msg.doctor} :    " style="float: left"/> 
+                    <h:outputText class="means" value=" #{terapevtController.doctor}" style="float: left"/> 
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                        <p:graphicImage name="/image/AjaxLoading.gif" />
+                    </p:dialog>    
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+

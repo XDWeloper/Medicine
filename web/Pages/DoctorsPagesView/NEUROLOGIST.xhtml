@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{Neurologist.neurologistResult}</title>
+        <h:outputStylesheet library="css-style" name="footer-style.css"/>
+        <h:outputStylesheet library="css-style" name="header-style.css"/>
+        <h:outputStylesheet library="css-style" name="terapevt-style.css"/>
+        <h:outputStylesheet library="css-style" name="index-style.css"/>
+    </h:head>
+
+    <h:body>
+        <h:form id="DocForm">
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="south" size="60" closable="true" collapsible="true">
+                    <div class = "footer">
+                        <ui:include src="/Pages/DoctorsPagesView/PagesFooter.xhtml"/>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="north" size="50"  closable="true" collapsible="true">
+                    <div class = "header">
+                    </div>
+                </p:layoutUnit>
+                <p:layoutUnit  id="contenLayout" position="center">
+
+                    <div id="docContent">
+
+                        <h:panelGrid columns="2" style="margin-bottom:0px;float: left" cellpadding="2">
+                            <h:outputText value="#{terMsg.openTogle} : " />
+                            <p:inputSwitch class="named" value="#{terapevtController.openTogle}">
+                                <p:ajax listener="#{terapevtController.changeTogle()}" 
+                                        update="complaintsField  historyField neurologicalStatusField dryReflectionField lumbarSubvisionField sensitivityField brushField
+                                                        diagnosisField osmotrRezField recomendationField SurveyField upSurveyField
+                                                        ambulanceTreatmentField holdTreatmentField sanatoriumTreatmentField dispensaryLookingField "  />
+                            </p:inputSwitch>
+                        </h:panelGrid>
+
+                        <h:outputText class="means" value="   #{terapevtController.today}  &emsp;" style="float: right"/>
+                        <h:outputText class="named" value="#{msg.data} :   &emsp;" style="float: right" />
+                        <div style="clear: both"></div>
+                        <p>
+                            <p:fieldset id="complaintsField"  legend="#{terMsg.complaints}"    toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}">
+                                <p:inputTextarea  class="textArea" value="#{neurologistController.complaints}"  rows="3"   style="width: 100%" >
+                                    <p:ajax listener="#{neurologistController.lisener()}"/>
+                                </p:inputTextarea>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset id="historyField" legend="#{terMsg.history} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:inputTextarea class="textArea" value="#{terapevtController.history}" rows="2"   style=" width:100% "  >
+                                    <p:ajax listener="#{neurologistController.lisener()}"/>
+                                </p:inputTextarea>
+                            </p:fieldset>
+                        </p>
+
+                        <p>
+                            <p:fieldset id="neurologicalStatusField" legend="#{Neurologist.neurologicalStatus} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <p:inputTextarea class="textArea" value="#{neurologistController.neurologicalStatus}" rows="2"   style=" width:100% "  >
+                                    <p:ajax listener="#{neurologistController.lisener()}"/>
+                                </p:inputTextarea>
+                            </p:fieldset>
+                        </p>
+
+                        <br/>
+
+                        <p>
+                            <p:fieldset id="dryReflectionField" legend="#{Neurologist.reflection} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row;flex-wrap: wrap">
+                                    <div>
+                                        <h:outputText class="named" value="#{Neurologist.dryReflection} :    " style="float: left;position: relative;top: 5px"/> 
+                                        <p:selectOneMenu  value="#{neurologistController.dryReflectionStatus}" style="float: left;margin-left: 5px;">
+                                            <p:ajax listener="#{neurologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="#{Neurologist.normal}" itemValue="normal" />
+                                            <f:selectItem itemLabel="#{Neurologist.upper}" itemValue="upper" />
+                                            <f:selectItem itemLabel="#{Neurologist.lower}" itemValue="lower" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                    <div>
+                                        <h:outputText class="named" value="#{Neurologist.upperLimbs} :    " style="float: left;position: relative;top: 5px"/>
+                                        <h:outputText class="named" value="D" style="float: left;position: relative;top: 5px"/>
+                                        <p:selectOneMenu  value="#{neurologistController.upperLimbReflection}" style="float: left;margin-left: 5px;">
+                                            <p:ajax listener="#{neurologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="#{Neurologist.equally}" itemValue="eq" />
+                                            <f:selectItem itemLabel="#{Neurologist.more}" itemValue="more" />
+                                            <f:selectItem itemLabel="#{Neurologist.less}" itemValue="less" />
+                                        </p:selectOneMenu>
+                                        <h:outputText class="named" value=" S" style="float: left;position: relative;top: 5px"/>
+                                    </div>
+                                    <div>
+                                        <h:outputText class="named" value="#{Neurologist.knee} :    " style="float: left;position: relative;top: 5px"/>
+                                        <h:outputText class="named" value="D" style="float: left;position: relative;top: 5px"/>
+                                        <p:selectOneMenu  value="#{neurologistController.kneeReflection}" style="float: left;margin-left: 5px;">
+                                            <p:ajax listener="#{nneurologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="#{Neurologist.equally}" itemValue="eq" />
+                                            <f:selectItem itemLabel="#{Neurologist.more}" itemValue="more" />
+                                            <f:selectItem itemLabel="#{Neurologist.less}" itemValue="less" />
+                                        </p:selectOneMenu>
+                                        <h:outputText class="named" value=" S" style="float: left;position: relative;top: 5px"/>
+                                    </div>
+                                    <div>
+                                        <h:outputText class="named" value="#{Neurologist.achilles} :    " style="float: left;position: relative;top: 5px"/>
+                                        <h:outputText class="named" value="D" style="float: left;position: relative;top: 5px"/>
+                                        <p:selectOneMenu  value="#{neurologistController.achilessReflection}" style="float: left;margin-left: 5px;">
+                                            <p:ajax listener="#{neurologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="#{Neurologist.equally}" itemValue="eq" />
+                                            <f:selectItem itemLabel="#{Neurologist.more}" itemValue="more" />
+                                            <f:selectItem itemLabel="#{Neurologist.less}" itemValue="less" />
+                                        </p:selectOneMenu>
+                                        <h:outputText class="named" value=" S" style="float: left;position: relative;top: 5px"/>
+                                    </div>
+                                </div>
+                            </p:fieldset>
+                        </p>
+                        <p>
+                            <div style="display: flex; flex-direction:  row;flex-wrap: wrap">
+                                <div style="width: 100%;padding: 5px;display: flex; flex-direction:  row;">
+                                    <h:outputText class="named" value="#{Neurologist.patologicalSign}" style=";position: relative;top: 5px" />
+                                <p:inputText class="means" value="#{neurologistController.patologicalSign}"   style="margin-left: 5px;flex: 1">
+                                    <p:ajax listener="#{neurologistController.lisener()}"/>
+                                </p:inputText> 
+                                </div>
+                                <div style="padding: 5px">
+                                    <h:outputText class="named" value="#{Neurologist.rombergPosition}" />
+                                    <p:selectOneMenu  value="#{neurologistController.rombergPosition}" style="margin-left: 5px;;position: relative;top: 5px">
+                                            <p:ajax listener="#{neurologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="#{Neurologist.stable}" itemValue="stabile" />
+                                            <f:selectItem itemLabel="#{Neurologist.noStabile}" itemValue="noStabile" />
+                                        </p:selectOneMenu> 
+                                    <h:outputText class="named" value="#{Neurologist.pnp}" />
+                                    <p:selectOneMenu  value="#{neurologistController.pnp}" style="margin-left: 5px;;position: relative;top: 5px">
+                                            <p:ajax listener="#{neurologistController.lisener()}"/>
+                                            <f:selectItem itemLabel="1" itemValue="1" />
+                                            <f:selectItem itemLabel="2" itemValue="2" />
+                                        </p:selectOneMenu> 
+                                </div>
+                                </div>
+                        </p>
+                        <p>
+                            <p:fieldset id="lumbarSubvisionField" legend="#{Neurologist.lumbarSubvision} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row;flex-wrap: wrap">
+                                    <h:outputText class="named" value="#{Neurologist.lordoz} : "  style="position: relative;top: 5px"/>
+                                    <p:selectOneMenu  value="#{neurologistController.lordoz}" style="margin-left: 5px;">
+                                                <p:ajax listener="#{neurologistController.lisener()}"/>
+                                                <f:selectItem itemLabel="#{Neurologist.powered}" itemValue="1" />
+                                                <f:selectItem itemLabel="#{Neurologist.smoof}" itemValue="2" />
+                                    </p:selectOneMenu> 
+                                    <p:selectManyCheckbox  value="#{neurologistController.lumbarSubvision1}" style="position: relative;margin-left: 20px" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.illness} &emsp;" itemValue="illness" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.frontMoveStop} &emsp; " itemValue="fms" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.back} &emsp; " itemValue="back" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.toRight} &emsp; " itemValue="toRight" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.toLeft} &emsp; " itemValue="toLeft" />
+                                    </p:selectManyCheckbox>  
+                                </div>
+                                <p>
+                                    <p:inputText class="means" value="#{neurologistController.lumbarSubvisionField1}"   style="width: 100%" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                    </p:inputText> 
+                                </p>
+                                <p>
+                                    <p:selectManyCheckbox  value="#{neurologistController.lumbarSubvision2}" style="position: relative;margin-left: 20px" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.kyphosis} &emsp;" itemValue="kyphosis" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.illness} &emsp; " itemValue="illness" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.tension} &emsp; " itemValue="tension" />
+                                    </p:selectManyCheckbox>  
+                                </p>
+                                <p>
+                                    <p:inputText class="means" value="#{neurologistController.lumbarSubvisionField2}"   style="width: 100%" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                    </p:inputText> 
+                                </p>
+                            </p:fieldset>
+                        </p>                        
+                        
+                        <p>
+                            <p:fieldset id="sensitivityField" legend="#{Neurologist.sensitivity} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row;flex-wrap: wrap">
+                                    <p:selectOneMenu  value="#{neurologistController.sensitivity}" style="margin-left: 5px;">
+                                        <p:ajax listener="#{neurologistController.lisener()}" update="DocForm:sensitivityField"/>
+                                                <f:selectItem itemLabel="#{Neurologist.saved}" itemValue="saved" />
+                                                <f:selectItem itemLabel="#{Neurologist.brokenSensitivity}" itemValue="brokenSensitivity" />
+                                    </p:selectOneMenu> 
+                                    <p:selectManyCheckbox  id="sensitivityCheck" value="#{neurologistController.sensitivityCheck}" style="position: relative;margin-left: 20px" 
+                                                           rendered="#{neurologistController.sensitivity.equals('brokenSensitivity')}" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.illness} &emsp;" itemValue="illness" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.frontMoveStop} &emsp; " itemValue="fms" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.back} &emsp; " itemValue="back" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.toRight} &emsp; " itemValue="toRight" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.toLeft} &emsp; " itemValue="toLeft" />
+                                    </p:selectManyCheckbox>  
+                                </div>
+                                <p>
+                                    <div style="display: flex; flex-direction:  row;flex-wrap: wrap">
+                                        <h:outputText class="named" value="C"  style="position: relative;top: 5px"/>
+                                        <h:outputText class="named" value="128"  style="position: relative;top: 15px;left: -10px;font-size: 8px"/>
+                                        <p:inputText class="means" value="#{neurologistController.c128}" style="flex: 1">
+                                            <p:ajax listener="#{neurologistController.lisener()}"/>
+                                        </p:inputText> 
+                                    </div>
+                                </p>
+                            </p:fieldset>
+                        </p>                        
+                        
+                        <p>
+                            <p:fieldset id="brushField" legend="#{Neurologist.brush} " toggleable="true" toggleSpeed="500" collapsed="#{!terapevtController.openTogle}" >
+                                <div style="display: flex; flex-direction:  row;flex-wrap: wrap">
+                                    <p:selectManyCheckbox  value="#{neurologistController.brush1}" style="position: relative;margin-left: 20px" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.wet} &emsp;" itemValue="wet" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.hot} &emsp; " itemValue="hot" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.marble} &emsp; " itemValue="marble" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.cyanosis} &emsp; " itemValue="cyanosis" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.pachydermia} &emsp; " itemValue="pachydermia" />
+                                    </p:selectManyCheckbox>  
+                                </div>
+                                <p>
+                                    <p:inputText class="means" value="#{neurologistController.brushField1}"   style="width: 100%" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                    </p:inputText> 
+                                </p>
+                                <p>
+                                    <p:selectManyCheckbox  value="#{neurologistController.brush2}" style="position: relative;margin-left: 20px" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.hyperkeratosis} &emsp;" itemValue="hyperkeratosis" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.malnutrition} &emsp; " itemValue="malnutrition" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.hyperhidrosis} &emsp; " itemValue="hyperhidrosis" />
+                                        <f:selectItem class="means" itemLabel="#{Neurologist.hypothermia} &emsp; " itemValue="hypothermia" />
+                                    </p:selectManyCheckbox>  
+                                </p>
+                                <p>
+                                    <p:inputText class="means" value="#{neurologistController.brushField2}"   style="width: 100%" >
+                                        <p:ajax listener="#{neurologistController.lisener()}"/>
+                                    </p:inputText> 
+                                </p>
+                            </p:fieldset>
+                        </p>                        
+                        
+                        <br/>
+
+                        <ui:include src="/Pages/DoctorsPagesView/DoctorsContentFooter.xhtml"/>
+
+                        <h:outputText class="named" value="#{msg.doctor} :    " style="float: left"/> 
+                        <h:outputText class="means" value=" #{terapevtController.doctor}" style="float: left"/> 
+
+                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                        <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="wait">
+                            <p:graphicImage name="/image/AjaxLoading.gif" />
+                        </p:dialog>                        
+                    </div>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+
